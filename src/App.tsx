@@ -1,5 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import { Link, Route, Routes } from "react-router-dom";
+
 import HomePage from "./pages/Home";
 import ListPage from "./pages/List";
 import AddPage from "./pages/Add";
@@ -47,7 +48,7 @@ function App() {
         </Routes>
       </div>
 
-      <Toaster />
+      <Toaster/>
     </>
   );
 }
