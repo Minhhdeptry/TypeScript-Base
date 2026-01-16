@@ -1,14 +1,31 @@
 import { Toaster } from "react-hot-toast";
 import { Link, Route, Routes } from "react-router-dom";
+import Button from "./components/Button";
 
 import HomePage from "./pages/Home";
 import ListPage from "./pages/List";
 import AddPage from "./pages/Add";
 import EditPage from "./pages/Edit";
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log("App components đã được render");
+    document.title = `Count is ${count}`
+  },[])
   return (
     <>
+      <h1>Biến count có giá trị: {count}</h1>
+      <Button 
+      count = {count}
+      label="Tăng count thêm 1"
+      color="primary"
+      bgColor="#007bff"
+      onClick={() => setCount(count + 1)}
+      />
+      
       <nav className="bg-blue-600 text-white shadow">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="text-xl font-semibold">

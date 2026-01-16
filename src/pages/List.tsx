@@ -1,4 +1,35 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+// type/interface
+type Course = {
+  id: number;
+  name: string;
+  credit: number;
+  category: string;
+  teacher: string;
+};
+
 function ListPage() {
+  //1. State
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  //2. Call api
+  useEffect(() => {
+    //fetch
+    //then catch
+    //axios
+    //async await
+    const getAll = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3000/courses");
+        // console.log(data);
+        setCourses(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAll();
+  }, []);
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Danh sách</h1>
@@ -12,21 +43,29 @@ function ListPage() {
                 Name
               </th>
               <th className="px-4 py-2 border border-gray-300 text-left">
-                Description
+                Teacher
               </th>
               <th className="px-4 py-2 border border-gray-300 text-left">
-                Actions
+                Category
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left">
+                Credit
               </th>
             </tr>
           </thead>
 
           <tbody>
-            <tr className="hover:bg-gray-50">
-              <td className="px-4 py-2 border border-gray-300">1</td>
-              <td className="px-4 py-2 border border-gray-300">Mark</td>
-              <td className="px-4 py-2 border border-gray-300">Description</td>
-              <td className="px-4 py-2 border border-gray-300">Edit</td>
-            </tr>
+            {courses.map((item) => (
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 border border-gray-300">{item.id}</td>
+                <td className="px-4 py-2 border border-gray-300">{item.name}</td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {item.teacher}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">{item.category}</td>
+                <td className="px-4 py-2 border border-gray-300">{item.credit}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
