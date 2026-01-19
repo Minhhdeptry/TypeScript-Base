@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // type/interface
 type Course = {
   id: number;
@@ -122,6 +123,7 @@ function ListPage() {
                     {item.credit}
                   </td>
                   <td>
+                    <Link to={`/edit/${item.id}`} className='bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-700'>Sửa</Link>
                     <button
                       onClick={() => {
                         handleDelete(item.id);
@@ -130,6 +132,7 @@ function ListPage() {
                     >
                       Xóa
                     </button>
+
                   </td>
                 </tr>
               ))}
