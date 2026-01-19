@@ -27,6 +27,13 @@
       "credit": 4,
       "category": "Đại cương",
       "teacher": "Phạm Văn D"
+    },
+    {
+      "name": "TypeScript",
+      "teacher": "Minh",
+      "category": "Chuyên ngành",
+      "credit": 2,
+      "id": 5
     }
   ]
 }
