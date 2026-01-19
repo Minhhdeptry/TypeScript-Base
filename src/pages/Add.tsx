@@ -4,14 +4,24 @@ function AddPage() {
       <h1 className="text-2xl font-semibold mb-6">Thêm mới</h1>
 
       <form className="space-y-6">
-        {/* Text input */}
+        {/* Name input */}
         <div>
-          <label htmlFor="text" className="block font-medium mb-1">
-            Text
+          <label htmlFor="name" className="block font-medium mb-1">
+            Name
           </label>
           <input
             type="text"
-            id="text"
+            id="name"
+            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label htmlFor="teacher" className="block font-medium mb-1">
+            Teacher
+          </label>
+          <input
+            type="text"
+            id="teacher"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -25,10 +35,21 @@ function AddPage() {
             id="selectOption"
             className="w-full border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="Chuyên ngành">Chuyên ngành</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
+        </div>
+
+        <div>
+          <label htmlFor="credit" className="block font-medium mb-1">
+            Credit
+          </label>
+          <input
+            type="text"
+            id="credit"
+            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </div>
 
         {/* Submit button */}
