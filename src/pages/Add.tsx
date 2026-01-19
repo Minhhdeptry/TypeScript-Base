@@ -73,7 +73,7 @@ function AddPage() {
             id="category"
             className="w-full border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option></option>
+            <option value="">--Chọn danh mục--</option>
             <option value="Chuyên ngành">Chuyên ngành</option>
             <option value="Cơ sở">Cơ sở</option>
             <option value="Đại cương">Đại cương</option>
@@ -90,8 +90,8 @@ function AddPage() {
               valueAsNumber: true,
               required: "Không được để trống credit",
               min: {
-                value: 0,
-                message: "Không được nhỏ hơn 0"
+                value: 1,
+                message: "Phải lớn hơn 0"
               }
             })}
             type="number"
