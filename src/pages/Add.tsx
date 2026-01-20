@@ -1,11 +1,25 @@
+// import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+// import z from 'zod';
+
+type FormValues = {
+  name: string;
+  teacher: string;
+  category: string;
+  credit: number;
+};
 
 function AddPage() {
-  const { register, handleSubmit, formState: {errors} } = useForm();
+  // const validate = z.object({
+  //   // name: z.string().min(3, "Name 3 ký tự").max(10),
+  //   // teacher: z.string().min(3, "Name 3 ký tự").max(10),
+  // })
+
+  const { register, handleSubmit, formState: {errors} } = useForm<FormValues>();
   const nav = useNavigate();
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: FormValues) => {
     console.log(values);
 
     try {
