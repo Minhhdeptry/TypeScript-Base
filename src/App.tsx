@@ -5,7 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 import ListPage from "./pages/List";
 import AddPage from "./pages/Add";
-import EditPage from "./pages/Edit";
+// import EditPage from "./pages/Edit";
 // import { useEffect, useState } from "react";
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
           <Route path="/" element={<HomePage/>}/>
           <Route path="/list" element={<ListPage/>}/>
           <Route path="/add" element={<AddPage/>}/>
-          <Route path="/edit/:id" element={<EditPage/>}/>
+          <Route path="/edit/:id" element={<AddPage/>}/>
         </Routes>
       </div>
 

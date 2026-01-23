@@ -9,10 +9,10 @@
     },
     {
       "id": 2,
-      "name": "TypeScript",
+      "name": "TypeScript 1",
       "credit": 2,
       "category": "Chuyên ngành",
-      "teacher": "Trần Thị B"
+      "teacher": "Trần Thị C"
     },
     {
       "id": 3,
@@ -27,13 +27,6 @@
       "credit": 4,
       "category": "Đại cương",
       "teacher": "Phạm Văn D"
-    },
-    {
-      "name": "TypeScript",
-      "teacher": "Minh",
-      "category": "Chuyên ngành",
-      "credit": 2,
-      "id": 5
     }
   ]
 }

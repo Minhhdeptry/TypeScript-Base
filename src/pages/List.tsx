@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 // type/interface
 type Course = {
   id: number;
@@ -14,7 +15,6 @@ function ListPage() {
   //1. State
   const [courses, setCourses] = useState<Course[]>([]);
   const [search, setSearch] = useState("");
-  const [teacher, setTeacher] = useState("all");
 
   //2. Call api
 
@@ -38,39 +38,28 @@ function ListPage() {
       if (!id) return;
       if (window.confirm("Bạn có chắc chắn muốn xóa không?")) {
         await axios.delete(`http://localhost:3000/courses/${id}`);
-        alert("Xóa thành công");
+        toast.success("Xóa thành công")
 
-        setCourses((prev) => {
-          return prev.filter((item) => item.id != id);
-        });
+        setCourses(prev => prev.filter((item) => item.id != id));
       }
     } catch (error) {
       console.log(error);
+      toast.error("Xóa thất bại: " + (error as AxiosError).message);
     }
   };
 
-  // Lọc
-  const teachers = Array.from(new Set(courses.map((item) => item.teacher)));
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Danh sách</h1>
       <div className="flex justify-between items-center mb-4">
         {/* Search */}
-        <input type="text" placeholder="Tìm kiếm theo tên"
+        <input type="text" placeholder="Tìm kiếm theo tên khóa học"
         value={search} onChange={(event) => {setSearch(event.target.value)}}
         className="border px-3 py-2 rounded w-64" 
         />
-
-        {/* Lọc */}
-        <select value={teacher} onChange={(event) => setTeacher(event.target.value)} className="border px-3 py-2 rounded">
-          <option value="all">Tất cả giảng viên</option>
-          {teachers.map((item) => (
-            <option key={item} value={item} > {item} </option>
-          ))}
-        </select>
+        
       </div>
-
       <div className="overflow-x-auto">
         <table className="w-full border border-gray-300 rounded-lg">
           <thead className="bg-gray-100">
@@ -100,10 +89,7 @@ function ListPage() {
               .filter((item) =>
                 item.name.toLowerCase().includes(search.toLowerCase()),
               )
-              // Lọc
-              .filter((item) => (
-                teacher === "all" || item.teacher === teacher
-              ))
+              
               // Danh sách
               .map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50">
@@ -124,6 +110,7 @@ function ListPage() {
                   </td>
                   <td>
                     <Link to={`/edit/${item.id}`} className='bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-700'>Sửa</Link>
+                    
                     <button
                       onClick={() => {
                         handleDelete(item.id);
