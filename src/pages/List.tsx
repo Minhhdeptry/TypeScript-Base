@@ -11,20 +11,35 @@ type Course = {
   teacher: string;
 };
 
+type Product = {
+  _id: string;
+  name: string;
+  price: number;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 function ListPage() {
   //1. State
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
 
   //2. Call api
 
   // Danh sách
   useEffect(() => {
+    const params: string[] = [];
+
+    params.push('minPrice=100');
+    params.push('maxPrice=100000000')
+
+    const queryString = params.join("&");
     const getAll = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/courses");
+        const { data } = await axios.get(`http://localhost:3000/api/products?${queryString}`);
         // console.log(data);
-        setCourses(data);
+        setCourses(data.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -33,14 +48,17 @@ function ListPage() {
   }, []);
 
   // Xóa
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (_id: string) => {
     try {
-      if (!id) return;
+      if (!_id) return;
+      // console.log(_id);
+      // return;
       if (window.confirm("Bạn có chắc chắn muốn xóa không?")) {
-        await axios.delete(`http://localhost:3000/courses/${id}`);
+        await axios.delete(`http://localhost:3000/api/products/${_id}`);
+        
         toast.success("Xóa thành công")
 
-        setCourses(prev => prev.filter((item) => item.id != id));
+        setCourses(prev => prev.filter((item) => item._id != _id));
       }
     } catch (error) {
       console.log(error);
@@ -69,14 +87,14 @@ function ListPage() {
                 Name
               </th>
               <th className="px-4 py-2 border border-gray-300 text-left">
-                Teacher
+                Price
               </th>
               <th className="px-4 py-2 border border-gray-300 text-left">
-                Category
+                Slug
               </th>
-              <th className="px-4 py-2 border border-gray-300 text-left">
+              {/* <th className="px-4 py-2 border border-gray-300 text-left">
                 Credit
-              </th>
+              </th> */}
               <th className="px-4 py-2 border border-gray-300 text-left">
                 Action
               </th>
@@ -92,28 +110,28 @@ function ListPage() {
               
               // Danh sách
               .map((item) => (
-                <tr key={item.id} className="hover:bg-gray-50">
+                <tr key={item._id} className="hover:bg-gray-50">
                   <td className="px-4 py-2 border border-gray-300">
-                    {item.id}
+                    {item._id}
                   </td>
                   <td className="px-4 py-2 border border-gray-300">
                     {item.name}
                   </td>
                   <td className="px-4 py-2 border border-gray-300">
-                    {item.teacher}
+                    {item.price}
                   </td>
                   <td className="px-4 py-2 border border-gray-300">
-                    {item.category}
+                    {item.slug}
                   </td>
-                  <td className="px-4 py-2 border border-gray-300">
+                  {/* <td className="px-4 py-2 border border-gray-300">
                     {item.credit}
-                  </td>
+                  </td> */}
                   <td>
-                    <Link to={`/edit/${item.id}`} className='bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-700'>Sửa</Link>
+                    <Link to={`/edit/${item._id}`} className='bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-700'>Sửa</Link>
                     
                     <button
                       onClick={() => {
-                        handleDelete(item.id);
+                        handleDelete(item._id);
                       }}
                       className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                     >
