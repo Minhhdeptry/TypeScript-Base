@@ -28,5 +28,22 @@
       "category": "Đại cương",
       "teacher": "Phạm Văn D"
     }
+  ],
+  "users": [
+    {
+      "email": "minhdz@gmail.com",
+      "password": "$2a$10$O0ZmcVweVoG9mFNJqvISFOIE6sMCSlzUEJcWRnke4n1Y/PKel3oQK",
+      "username": "Minhdz",
+      "confirmPassword": "1234567",
+      "id": 1
+    },
+    
+    {
+      "email": "minhdeptry@gmail.com",
+      "password": "$2a$10$fcuzB9O.GpibZxRu1OF2g.JUEPMcbvdv9/2mRl3/QacGcWdln/zQe",
+      "username": "Minhdeptry",
+      "confirmPassword": "1234567",
+      "id": 2
+    }
   ]
 }

@@ -5,6 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 import ListPage from "./pages/List";
 import AddPage from "./pages/Add";
+import AuthPage from "./pages/AuthPage";
 // import EditPage from "./pages/Edit";
 // import { useEffect, useState } from "react";
 
@@ -45,10 +46,10 @@ function App() {
           </div>
 
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="#" className="hover:text-gray-200">
+            <Link to="/login" className="hover:text-gray-200">
               Đăng nhập
             </Link>
-            <Link to="#" className="hover:text-gray-200">
+            <Link to="/register" className="hover:text-gray-200">
               Đăng ký
             </Link>
           </div>
@@ -62,6 +63,8 @@ function App() {
           <Route path="/list" element={<ListPage/>}/>
           <Route path="/add" element={<AddPage/>}/>
           <Route path="/edit/:id" element={<AddPage/>}/>
+          <Route path="/register" element={<AuthPage/>}/>
+          <Route path="/login" element={<AuthPage isLogin={true}/>}/>
         </Routes>
       </div>
 
