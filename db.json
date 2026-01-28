@@ -37,12 +37,10 @@
       "confirmPassword": "1234567",
       "id": 1
     },
-    
     {
       "email": "minhdeptry@gmail.com",
-      "password": "$2a$10$fcuzB9O.GpibZxRu1OF2g.JUEPMcbvdv9/2mRl3/QacGcWdln/zQe",
+      "password": "$2a$10$QggGJYcDp9MwgTKTIzTCB.UH.yjJLVdmalAMlVd8axjHHAkoOW8iy",
       "username": "Minhdeptry",
-      "confirmPassword": "1234567",
       "id": 2
     }
   ]

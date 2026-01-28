@@ -19,13 +19,13 @@ type FormValues = {
 function AuthPage({ isLogin }: Props) {
   const loginValid = j.object({
     email: j.string().email().required(),
-    password: j.string().min(7).required(),
+    password: j.string().min(6).required(),
   });
 
   const registerValid = j.object({
     username: j.string().min(4).required(),
     email: j.string().email().required(),
-    password: j.string().min(7).required(),
+    password: j.string().min(6).required(),
     confirmPassword: j.string().valid(j.ref("password")).required(),
   });
 
@@ -49,7 +49,8 @@ function AuthPage({ isLogin }: Props) {
         nav("/list");
       } else {
         // register
-        await axios.post("http://localhost:3000/register", values);
+        const {confirmPassword, ...data} = values;
+        await axios.post("http://localhost:3000/register", data);
         toast.success("Đăng ký thành công");
         nav("/login");
       }
