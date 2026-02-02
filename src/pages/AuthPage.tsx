@@ -18,22 +18,50 @@ type FormValues = {
 
 function AuthPage({ isLogin }: Props) {
   const loginValid = j.object({
-    email: j.string().email().required(),
-    password: j.string().min(6).required(),
+    email: j.string().email().required() .messages({
+      "string.base": "Email phải là chuỗi",
+      "string.email": "Email không đúng định dạng",
+      "any.required": "Email không được để trống",
+      "string.empty": "Email không được để trống",
+    }),
+    password: j.string().min(6).required() .messages({
+      "string.base": "Mật khẩu phải là chuỗi",
+      "string.min": "Mật khẩu phải có ít nhất 6 ký tự",
+      "string.empty": "Mật khẩu không được để trống",
+      "any.required": "Vui lòng nhập mật khẩu",
+    }),
   });
 
   const registerValid = j.object({
-    username: j.string().min(4).required(),
-    email: j.string().email().required(),
-    password: j.string().min(6).required(),
-    confirmPassword: j.string().valid(j.ref("password")).required(),
+    username: j.string().min(4).required() .messages({
+      "string.base": "Username phải là chuỗi",
+      "string.min": "Username phải có ít nhất 4 ký tự",
+      "string.empty": "Username không được để trống",
+      "any.required": "Vui lòng nhập username",
+    }),
+    email: j.string().email().required() .messages({
+      "string.base": "Email phải là chuỗi",
+      "string.email": "Email không đúng định dạng",
+      "any.required": "Email không được để trống",
+      "string.empty": "Email không được để trống",
+    }),
+    password: j.string().min(6).required() .messages({
+      "string.base": "Mật khẩu phải là chuỗi",
+      "string.min": "Mật khẩu phải có ít nhất 6 ký tự",
+      "string.empty": "Mật khẩu không được để trống",
+      "any.required": "Vui lòng nhập mật khẩu",
+    }),
+    confirmPassword: j.string().valid(j.ref("password")).required() .messages({
+      "any.only": "Mật khẩu không khớp",
+      "any.required": "Vui lòng nhập lại mật khẩu",
+      "string.empty": "Vui lòng nhập lại mật khẩu",
+    }),
   });
 
   const nav = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<FormValues>({
     resolver: joiResolver(isLogin ? loginValid : registerValid),
   });
@@ -75,7 +103,6 @@ function AuthPage({ isLogin }: Props) {
               type="text"
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {errors.username && <span>{errors.username.message}</span>}
           </div>
         )}
 
@@ -88,7 +115,6 @@ function AuthPage({ isLogin }: Props) {
             type="email"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {errors.email && <span>{errors.email.message}</span>}
         </div>
 
         <div>
@@ -100,7 +126,6 @@ function AuthPage({ isLogin }: Props) {
             type="password"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {errors.password && <span>{errors.password.message}</span>}
         </div>
 
         {!isLogin && (
@@ -113,9 +138,7 @@ function AuthPage({ isLogin }: Props) {
               type="password"
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {errors.confirmPassword && (
-              <span>{errors.confirmPassword.message}</span>
-            )}
+            
           </div>
         )}
 
