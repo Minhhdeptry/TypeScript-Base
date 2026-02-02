@@ -30,6 +30,7 @@ function AddPage() {
   const nav = useNavigate();
 
   useEffect(() => {
+    if(!id) return;
     const getCourseById = async () => {
       try {
         const { data } = await axios.get(`http://localhost:3000/Courses/${id}`);

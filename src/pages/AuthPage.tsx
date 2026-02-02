@@ -44,12 +44,15 @@ function AuthPage({ isLogin }: Props) {
           "http://localhost:3000/login",
           values,
         );
+        // console.log(data);
+
         localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("user", JSON.stringify({ email: values.email }));
         toast.success("Đăng nhập thành công");
         nav("/list");
       } else {
         // register
-        const {confirmPassword, ...data} = values;
+        const { confirmPassword, ...data } = values;
         await axios.post("http://localhost:3000/register", data);
         toast.success("Đăng ký thành công");
         nav("/login");
